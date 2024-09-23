@@ -8,9 +8,9 @@ quotes = [
     'Worry more about what you want to do than what you want to be', 
     'Even when things are tough, dont lose respect for the other person', 
     'Hope is that thing inside us that insists, despite all the evidence to the contrary, that something better awaits us if we have the courage to reach for it, and to work for it, and to fight for it ']
-images = ['quotes/barack-img/barack1.webp', 
-        'quotes/barack-img/barack2.jpg', 
-        'quotes/barack-img/barack3.jpg'
+images = ['barack-img/barack1.webp', 
+        'barack-img/barack2.jpg', 
+        'barack-img/barack3.jpg'
         ]
 
 def quote(request):
