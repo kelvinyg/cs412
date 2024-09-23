@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Barack Obama Quote of the Day{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'quotes/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Barack Obama Quote of the Day</h1>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="{% url 'quote' %}">Quote of the Day</a></li>
+                <li><a href="{% url 'showall' %}">Show All</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <div class="content">
+            {% block content %}
+            <!-- Child templates will insert content here -->
+            {% endblock %}
+        </div>
+    </div>
+
+    
+</body>
+</html>

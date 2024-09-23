@@ -1,0 +1,10 @@
+{% extends 'quotes/base.html' %}
+{% load static %}
+
+{% block title %}Random Quote{% endblock %}
+
+{% block content %}
+    <h1>Inspiration from Obama</h1>
+    <p>{{ quote }}</p>
+    <img src="{% static image %}" alt="Image of Barack Obama">
+{% endblock %}

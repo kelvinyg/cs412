@@ -1,0 +1,26 @@
+{% extends 'quotes/base.html' %}
+{% load static %}
+
+{% block title %}All Quotes{% endblock %}
+
+{% block content %}
+    <!-- Display all quotes -->
+    <h2>Quotes from your beloved!</h2>
+
+        {% for quote in quotes %}
+            <p>{{ quote }}</p>  <!-- Loop through each quote -->
+        {% empty %}
+            <p>No quotes available.</p>
+        {% endfor %}
+
+
+    <!-- Display all images -->
+    <h2>Images of Me!</h2>
+    <div>
+        {% for image in images %}
+            <img src="{% static image %}" alt="Image of Barack Obama" >
+        {% empty %}
+            <p>No images available.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
