@@ -48,30 +48,26 @@ def order(request):
     
     # Pass the special and its price to the context
     context = {
-        'special': daily_item,  # The randomly selected daily special
-        'special_price': daily_special_price,  # The price of the special
-        'menu': menu_prices  # Full menu for display (optional)
+        'special': daily_item,  
+        'special_price': daily_special_price, 
+        'menu': menu_prices  
     }
 
-    # Render the 'order.html' template with the context
     return render(request, 'restaurant/order.html', context)
 def confirmation(request):
     if request.method == 'POST':
         # Read the form data
-        customer_name = request.POST.get('name')
-        customer_email = request.POST.get('email')
-        customer_phone = request.POST.get('phone')
+        customer_name = request.POST['name']
+        customer_email = request.POST['email']
+        customer_phone = request.POST['phone']
 
-        # Main items selected
-        items = request.POST.getlist('items')  # Get selected items from the menu
+        items = request.POST.getlist('items') 
         
         # Additional customizations selected for Seafood Boil
         customizations = request.POST.getlist('customize_seafood_boil')
         
-        # Check if the daily special was selected
         include_special = request.POST.get('include_special')
 
-        # Calculate total price
         total_price = sum(menu_prices.get(item, 0) for item in items)
         
         # Add the price for the daily special if selected
@@ -83,7 +79,6 @@ def confirmation(request):
         for customization in customizations:
             total_price += customization_prices.get(customization, 0)
 
-        # Prepare the context for the confirmation page
         context = {
             'customer_name': customer_name,
             'customer_email': customer_email,

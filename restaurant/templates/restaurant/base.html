@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Kelvin's Seafood Shack{% endblock %}</title>
-    {% load static %}  <!-- Load static files here -->
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/restaurant.css' %}">
 </head>
 <body>
     <header>
-        <h1>Kelvin's Seafood Shack</h1>  <!-- Main restaurant heading centered -->
+        <h1>Kelvin's Seafood Shack</h1> 
     </header>
 
     <div class="container">
@@ -26,7 +26,7 @@
         <div class="main-content">
             <div class="content">
                 {% block content %}
-                <!-- Page-specific content will be injected here -->
+            
                 {% endblock %}
             </div>
         </div>
