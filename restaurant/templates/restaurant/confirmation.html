@@ -1,0 +1,32 @@
+<!-- templates/restaurant/confirmation.html -->
+{% extends "restaurant/base.html" %} 
+{% block title %}Order Confirmation - Kelvin's Seafood Shack{% endblock %}
+
+{% block content %}
+    <h2>Order Confirmation</h2>
+
+    <p>Thank you, {{ customer_name }}! Your order has been received.</p>
+
+    <h3>Order Summary:</h3>
+    <ul>
+        {% for item in items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+        {% if daily_special %}
+            <li>Daily Special: {{ daily_special }}</li>
+        {% endif %}
+    </ul>
+
+    <h3>Total Price:</h3>
+    <p>${{ total_price }}</p>
+
+    <h3>Special Instructions:</h3>
+    <p>{{ special_instructions }}</p>
+
+    <h3>Customer Information:</h3>
+    <p>Name: {{ customer_name }}</p>
+    <p>Phone: {{ customer_phone }}</p>
+    <p>Email: {{ customer_email }}</p>
+
+    <p>Your order will be ready soon!</p>
+{% endblock %}

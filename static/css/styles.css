@@ -1,97 +1,68 @@
-/* Global styles */
-body, html {
+/* General body and layout styles */
+html, body {
     margin: 0;
     padding: 0;
-    height: 100%; /* Ensure the body and html take full height */
-    font-family: Arial, sans-serif;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    height: 100%;
+    font-family: 'Arial', sans-serif;
 }
 
-/* Header */
-header {
-    background-color: #333;
-    color: white;
-    padding: 5px;
-    text-align: center;
-    font-size: 10px;
-    width: 100%; /* Ensure the header spans the full width of the page */
-    box-sizing: border-box; /* Include padding in the element's total width/height */
-}
-
-/* Container that holds the sidebar and content */
-.container {
+body {
     display: flex;
-    min-height: calc(100vh - 60px); /* Adjust to subtract header height */
+    flex-direction: row; /* Flexbox for horizontal layout */
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-/* Sidebar styling */
+/* Sidebar (navigation) styles */
 .sidebar {
-    background-color: #eee;
-    padding: 15px;
-    width: 200px;
-    height: auto;
-    position: sticky;
-    top: 0;
+    background-color: #fff;
+    width: 200px; /* Fixed width for the sidebar */
+    padding: 20px;
+    height: 100vh; /* Full viewport height */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
 }
 
 .sidebar ul {
-    list-style-type: none;
     padding: 0;
+    list-style-type: none;
 }
 
 .sidebar ul li {
-    margin-bottom: 15px;
+    margin: 20px 0;
 }
 
 .sidebar ul li a {
+    color: #4a4a4a;
     text-decoration: none;
-    color: #333;
-    display: block;
-    padding: 10px;
-    border-radius: 4px;
+    font-size: 1.2em;
 }
 
 .sidebar ul li a:hover {
-    background-color: #ccc;
     color: #000;
-}
-
-/* Main content styling */
-.content {
-    flex: 1; /* Make the content fill the remaining space */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Center the content vertically */
-    text-align: center;
-    padding: 20px;
-}
-
-/* Quote and image styling */
-h2 {
-    font-size: 25px;
     font-weight: bold;
-    margin-bottom: 20px;
 }
 
-p {
-    font-size: 15px;
-    margin-bottom: 20px;
+/* Main content area */
+.main-container {
+    margin-left: 220px; /* Space for the sidebar */
+    padding: 20px;
+    flex: 1; /* Take up remaining width */
 }
 
-img {
-    height: 250px; /* Set a uniform height for all images */
-    width: auto; /* Width will adjust automatically */
-    object-fit: cover; /* Ensures images don't distort */
-    margin-bottom: 20px;
+/* Content section */
+.content {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 }
 
-/* Footer styling */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    width: 100%; /* Ensure footer spans the full width */
-    box-sizing: border-box; /* Include padding in the element's total width/height */
+.content img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
 }

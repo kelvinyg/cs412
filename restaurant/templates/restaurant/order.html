@@ -1,0 +1,50 @@
+<!-- templates/restaurant/order.html -->
+{% extends "restaurant/base.html" %} 
+
+{% block title %}Order - Kelvin's Seafood Shack{% endblock %}
+
+{% block content %}
+    <h2>Place Your Order</h2>
+
+    <form method="POST" action="{% url 'confirmation' %}">
+        {% csrf_token %}
+
+        <!-- Display Today's Special -->
+        <h3>Today's Special</h3>
+        <p><strong>{{ special }}:</strong> ${{ special_price }}</p>
+        <input type="checkbox" name="include_special" value="{{ special }}"> Add today's special<br>
+
+        <!-- Display Regular Menu Items -->
+        <h4>Regular Menu:</h4>
+        {% for item, price in menu.items %}
+            <input type="checkbox" name="items" value="{{ item }}"> {{ item }} - ${{ price }}<br>
+        {% endfor %}
+
+        <!-- Customization Options for Seafood Boil -->
+        <h4>Customize Your Seafood Boil:</h4>
+        <label>
+            <input type="checkbox" name="customize_seafood_boil" value="Crawfish"> Crawfish - $15<br>
+            <input type="checkbox" name="customize_seafood_boil" value="Alaskan King Crab"> Alaskan King Crab - $25<br>
+            <input type="checkbox" name="customize_seafood_boil" value="Shrimp"> Shrimp - $10<br>
+            <input type="checkbox" name="customize_seafood_boil" value="Lobster Tail"> Lobster Tail - $30<br>
+        </label>
+
+        <!-- Special Instructions Field -->
+        <h3>Special Instructions:</h3>
+        <textarea name="special_instructions" placeholder="Any special instructions?"></textarea><br>
+
+        <!-- Customer Information Section -->
+        <h3>Customer Information</h3>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Submit Order">
+    </form>
+{% endblock %}

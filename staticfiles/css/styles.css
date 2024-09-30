@@ -1,0 +1,97 @@
+/* Global styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensure the body and html take full height */
+    font-family: Arial, sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    font-size: 10px;
+    width: 100%; /* Ensure the header spans the full width of the page */
+    box-sizing: border-box; /* Include padding in the element's total width/height */
+}
+
+/* Container that holds the sidebar and content */
+.container {
+    display: flex;
+    min-height: calc(100vh - 60px); /* Adjust to subtract header height */
+}
+
+/* Sidebar styling */
+.sidebar {
+    background-color: #eee;
+    padding: 15px;
+    width: 200px;
+    height: auto;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #ccc;
+    color: #000;
+}
+
+/* Main content styling */
+.content {
+    flex: 1; /* Make the content fill the remaining space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center the content vertically */
+    text-align: center;
+    padding: 20px;
+}
+
+/* Quote and image styling */
+h2 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+img {
+    height: 250px; /* Set a uniform height for all images */
+    width: auto; /* Width will adjust automatically */
+    object-fit: cover; /* Ensures images don't distort */
+    margin-bottom: 20px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%; /* Ensure footer spans the full width */
+    box-sizing: border-box; /* Include padding in the element's total width/height */
+}

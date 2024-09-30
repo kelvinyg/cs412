@@ -1,0 +1,19 @@
+{% extends "restaurant/base.html" %}
+{% load static %}
+
+{% block content %}
+    <h2>Welcome to Kelvin's Seafood Shack</h2>
+
+    <img src="{% static 'barack-img/kelvinshack.webp' %}" alt="Restaurant Image">
+
+    <p>Located at 123 Foodie Lane, Flavor Town. We offer a variety of fresh and delicious seafood dishes!</p>
+
+    <h3>Hours of Operation</h3>
+    <ul>
+        <li>Monday-Friday: 11:00 AM - 10:00 PM</li>
+        <li>Saturday-Sunday: 9:00 AM - 11:00 PM</li>
+    </ul>
+
+    <h3>Today's Special</h3>
+    <p>Check out our <a href="{% url 'order' %}">order page</a> to see today's daily special!</p>
+{% endblock %}
