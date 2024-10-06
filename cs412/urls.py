@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),  # Django admin
     path('restaurant/', include('restaurant.urls')),  # Restaurant URLs
+    path('blog/', include('blog.urls')),
 ]
 
 # Serve static files during development
