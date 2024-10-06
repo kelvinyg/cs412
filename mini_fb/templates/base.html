@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Application{% endblock %}</title>
+    
+    <!-- Load static files -->
+    {% load static %}
+    
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="{% static 'css/mini_fb.css' %}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Mini Facebook</h1>
+        <nav>
+            <!-- Future navigation links will go here -->
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        {% block content %}
+        <!-- This will be filled in by child templates -->
+        {% endblock %}
+    </main>
+</body>
+</html>

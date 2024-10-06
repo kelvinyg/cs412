@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}All Profiles{% endblock %}
+
+{% block content %}
+<h2>All Profiles</h2>
+<div class="profile-grid">
+    {% for profile in profiles %}
+    <div class="profile-card">
+        {% if profile.profile_pic %}
+        <img src="{{ profile.profile_pic }}" alt="Profile Picture of {{ profile.first_name }}">
+        {% endif %}
+        <div class="profile-info">
+            <strong>{{ profile.first_name }} {{ profile.last_name }}</strong>
+            <p>{{ profile.city }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
