@@ -1,0 +1,21 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Create a New Message</h2>
+
+    <form method="POST" action="{% url 'create_status' pk=profile.pk %}">
+        {% csrf_token %}
+        
+        <!-- Message Field -->
+        <label for="id_message">Message</label>
+        {{ form.message }}
+
+        <!-- Submit Button -->
+        <div class="form-buttons">
+            <button type="submit" class="btn">Create Message</button>
+            <a href="{% url 'show_profile' pk=profile.pk %}" class="btn cancel-button">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

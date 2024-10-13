@@ -16,8 +16,11 @@
     <!-- Header Section -->
     <header>
         <h1>Mini Facebook</h1>
-        <nav>
-            <!-- Future navigation links will go here -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="{% url 'show_all_profiles' %}">View All Profiles</a></li>
+                <li><a href="{% url 'create_profile' %}">Create New Profile</a></li>
+            </ul>
         </nav>
     </header>
 

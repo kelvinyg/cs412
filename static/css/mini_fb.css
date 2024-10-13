@@ -9,7 +9,7 @@ body {
 
 /* Header Styling */
 header {
-    background-color: #483DCC; /* Blue background for the header */
+    background-color: #483DCC;
     color: white;
     padding: 20px;
     text-align: left;
@@ -19,13 +19,46 @@ header {
 header h1 {
     margin: 0;
     padding: 0 20px;
-    font-size: 1.8em; /* Adjust the font size here */
+    font-size: 1.8em;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+    background-color: #333; /* Dark background for navbar */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style-type: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center the navigation links */
+}
+
+.navbar ul li {
+    margin: 0 15px; /* Space between links */
+}
+
+.navbar ul li a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* White text for links */
+    font-size: 1.1em; /* Slightly larger font size */
+    padding: 10px 20px; /* Padding around links */
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for links */
+.navbar ul li a:hover {
+    background-color: #575757; /* Lighter grey background on hover */
 }
 
 /* Main Content Styling */
 main {
     padding: 20px;
-    background-color: white; /* White background for the profile content */
+    background-color: white;
     margin: 20px auto;
     max-width: 1200px;
     border-radius: 10px;
@@ -34,7 +67,7 @@ main {
 /* Profile Grid */
 .profile-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
 
@@ -44,15 +77,20 @@ main {
     padding: 15px;
     text-align: center;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for the card */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .profile-card img {
-    width: 150px;  /* Set a fixed width */
-    height: 150px; /* Set a fixed height */
+    width: 150px;
+    height: 150px;
     border-radius: 10px;
-    object-fit: cover; /* Ensure aspect ratio is maintained and the image covers the box */
-    display: block;
+    object-fit: cover;
     margin: 0 auto 10px;
 }
 
@@ -60,17 +98,15 @@ main {
 .profile-info strong {
     display: block;
     font-size: 1.1em;
-    color: #2b2b2b;
+    color: #1f1bbf;
     font-weight: bold;
     margin-top: 10px;
-    color: #1f1bbf; /* Darker blue for the name */
 }
 
 .profile-info p {
-    color: #333;
+    color: #555;
     margin: 5px 0;
     font-size: 0.9em;
-    color: #555;
 }
 
 /* Text Styling */
@@ -86,7 +122,7 @@ h2 {
     align-items: center;
     justify-content: center;
     padding: 40px;
-    background-color: #fff;
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 800px;
@@ -100,8 +136,8 @@ h2 {
 .profile-image img {
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 150px;  /* Reduced width */
-    height: 150px; /* Reduced height */
+    width: 150px;
+    height: 150px;
     object-fit: cover;
 }
 
@@ -117,4 +153,138 @@ h2 {
 .profile-details p {
     margin: 10px 0;
     color: #666;
+}
+
+/* Form Container Styling */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus {
+    border-color: #483DCC;
+    outline: none;
+}
+
+/* Button Styling */
+.btn, button {
+    display: inline-block; /* Ensure anchor behaves like a button */
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #483DCC;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline for anchor tags */
+    text-align: center; /* Center the text */
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover, button:hover {
+    background-color: #3a32a1;
+}
+
+.btn:active, button:active {
+    background-color: #31278f;
+    transform: scale(0.98);
+}
+
+/* Cancel Button Styling */
+.cancel-button {
+    background-color: #d9534f; /* Cancel button background */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #c9302c;
+}
+
+.cancel-button:active {
+    background-color: #ac2925;
+}
+
+/* Form Buttons Container */
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-buttons .btn {
+    flex: 1;
+}
+
+/* Form Error Messages */
+.form-container .errorlist {
+    color: red;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .profile-image {
+        margin: 0 0 20px;
+    }
+
+    /* For responsive navbar */
+    .navbar ul {
+        flex-direction: column;
+    }
+
+    .navbar ul li {
+        margin: 10px 0;
+    }
+
+    /* Adjust form buttons on small screens */
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .form-buttons .btn {
+        margin-right: 0;
+    }
 }

@@ -36,4 +36,9 @@
     {% endif %}
 </div>
 
+<!-- Add the button to create a new message -->
+<div class="create-status-button">
+    <a href="{% url 'create_status' pk=profile.pk %}" class="btn btn-primary">Add Status Message</a>
+</div>
+
 {% endblock %}
