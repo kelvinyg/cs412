@@ -4,12 +4,16 @@
 <div class="form-container">
     <h2>Create a New Message</h2>
 
-    <form method="POST" action="{% url 'create_status' pk=profile.pk %}">
+    <form method="POST" action="{% url 'create_status' pk=profile.pk %}" enctype="multipart/form-data">
         {% csrf_token %}
         
         <!-- Message Field -->
         <label for="id_message">Message</label>
         {{ form.message }}
+
+        <!-- Image Field -->
+        <input type="file" name = "files" multiple />
+
 
         <!-- Submit Button -->
         <div class="form-buttons">
