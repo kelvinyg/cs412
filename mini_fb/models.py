@@ -25,6 +25,15 @@ class StatusMessage(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='status_messages')
 
     def __str__(self):
-        return f"{self.profile.first_name}'s Message: {self.message[:50]}"  # Show first 50 characters of the message
+        return f"{self.profile.first_name}'s Message: {self.message[:50]}"  
+    
+    def get_images(self):
+        return Image.objects.filter(status_message = self)
+
+
+class Image(models.Model):
+    image_file = models.ImageField(blank=True)
+    status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE, related_name="images")
+    timestamp = models.DateTimeField(auto_now_add=True)
     
     

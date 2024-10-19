@@ -6,9 +6,10 @@
 <h2>{{ profile.first_name }} {{ profile.last_name }}'s Profile</h2>
 
 <div class="profile-details">
-    <!-- Display profile picture -->
+    <!-- Display profile picture if it's present, otherwise skip -->
     <div class="profile-image">
     {% if profile.profile_pic %}
+        <!-- No need for .url if it's not an ImageField -->
         <img src="{{ profile.profile_pic }}" alt="Profile Picture of {{ profile.first_name }}">
     {% endif %}
     </div>
@@ -26,6 +27,15 @@
                 <li>
                     <p>{{ status.message }}</p>
                     <small>Posted on: {{ status.timestamp }}</small>
+                    
+                    <!-- Display images associated with the status message -->
+                    {% if status.get_images.all %}
+                        <div class="status-images">
+                            {% for img in status.get_images.all %}
+                                <img src="{{ img.image_file.url }}" alt="Image for status message">
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </li>
             {% empty %}
                 <p>No status messages yet.</p>
