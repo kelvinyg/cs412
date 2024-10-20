@@ -295,3 +295,12 @@ input[type="file"]:focus {
     font-size: 14px; /* Adjust font size */
     margin: 10px auto; /* Center the button */
 }
+
+/* Smaller button styles */
+.btn-smaller {
+    padding: 5px 10px;   /* Reduce padding to make it smaller */
+    font-size: 12px;     /* Decrease font size */
+    width: auto;         /* Allow the button to adjust to the content size */
+    display: inline-block;
+    border-radius: 4px;  /* Slightly round the corners */
+}

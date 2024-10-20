@@ -9,14 +9,12 @@
     <!-- Display profile picture if it's present, otherwise skip -->
     <div class="profile-image">
     {% if profile.profile_pic %}
-        <!-- No need for .url if it's not an ImageField -->
         <img src="{{ profile.profile_pic }}" alt="Profile Picture of {{ profile.first_name }}">
     {% endif %}
     </div>
     <p><strong>City:</strong> {{ profile.city }}</p>
     <p><strong>Email:</strong> {{ profile.email }}</p>
 </div>
-
 
 <div class="update-profile-link">
     <a href="{% url 'update_profile' pk=profile.pk %}" class="btn update-profile-btn">Update Profile</a>
@@ -32,7 +30,11 @@
                 <li>
                     <p>{{ status.message }}</p>
                     <small>Posted on: {{ status.timestamp }}</small>
-                    
+
+                    <!-- Add the delete link -->
+                    <a href="{% url 'delete_status' status.pk %}" class="btn btn-danger btn-smaller">Delete</a>             
+                    <!-- Add the edit link for updating a status message -->
+                    <a href="{% url 'update_status' status.pk %}" class="btn btn-danger btn-smaller">Edit</a>       
                     <!-- Display images associated with the status message -->
                     {% if status.get_images.all %}
                         <div class="status-images">
@@ -55,6 +57,5 @@
 <div class="create-status-button">
     <a href="{% url 'create_status' pk=profile.pk %}" class="btn btn-primary">Add Status Message</a>
 </div>
-
 
 {% endblock %}

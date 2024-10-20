@@ -1,0 +1,16 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>Update Status Message</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <!-- Confirm button (Submit the form to update the status) -->
+    <button type="submit" class="btn btn-primary">Confirm Update</button>
+
+    <!-- Cancel button (Redirects to the profile page without updating) -->
+    <a href="{% url 'show_profile' pk=object.profile.pk %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
