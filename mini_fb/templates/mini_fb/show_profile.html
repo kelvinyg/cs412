@@ -17,6 +17,11 @@
     <p><strong>Email:</strong> {{ profile.email }}</p>
 </div>
 
+
+<div class="update-profile-link">
+    <a href="{% url 'update_profile' pk=profile.pk %}" class="btn update-profile-btn">Update Profile</a>
+</div>
+
 <hr>
 
 <h3>Status Messages</h3>
@@ -50,5 +55,6 @@
 <div class="create-status-button">
     <a href="{% url 'create_status' pk=profile.pk %}" class="btn btn-primary">Add Status Message</a>
 </div>
+
 
 {% endblock %}

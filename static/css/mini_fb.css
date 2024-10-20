@@ -288,3 +288,10 @@ input[type="file"]:focus {
         margin-right: 0;
     }
 }
+
+.update-profile-btn {
+    width: 20%; /* Adjust width as needed */
+    padding: 8px 16px; /* Adjust padding to make it smaller */
+    font-size: 14px; /* Adjust font size */
+    margin: 10px auto; /* Center the button */
+}
