@@ -1,7 +1,10 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from .models import Profile, Image
 from django.urls import reverse
 from .forms import *
+from django.shortcuts import get_object_or_404, redirect
+
+
 
 
 class ShowAllProfilesView(ListView):
@@ -84,5 +87,29 @@ class UpdateStatusMessageView(UpdateView):
         return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
 
 
+class CreateFriendView(View):
+    def dispatch(self, request, *args, **kwargs):
+        # Get the primary keys from the URL parameters
+        pk = kwargs.get('pk')
+        other_pk = kwargs.get('other_pk')
 
+        # Get the Profile instances for both the current user and the friend to be added
+        profile = get_object_or_404(Profile, pk=pk)
+        other_profile = get_object_or_404(Profile, pk=other_pk)
 
+        # Call the add_friend method on the current profile
+        profile.add_friend(other_profile)
+
+        # Redirect to the profile page (you can customize the redirect as needed)
+        return redirect('show_profile', pk=pk)
+    
+class ShowFriendSuggestionsView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Retrieve friend suggestions for the profile
+        context['friend_suggestions'] = self.object.get_friend_suggestions()
+        return context

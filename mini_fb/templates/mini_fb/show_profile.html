@@ -22,8 +22,9 @@
 
 <hr>
 <!-- Friends Section -->
-<!-- Friends Section -->
-<h3>Friends</h3>
+<h3>Friends
+    <a href="{% url 'friend_suggestions' pk=profile.pk %}" class="btn btn-primary btn-smaller" style="margin-left: 10px;">View Friend Suggestions</a>
+</h3>
 <div class="friends-list">
     {% with friends=profile.get_friends %}
         {% if friends %}

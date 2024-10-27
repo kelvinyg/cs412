@@ -29,6 +29,28 @@ class Profile(models.Model):
 
         return list(set(friends_profiles))
     
+    def add_friend(self,other):
+        if self == other:
+            print("Cannot Add Yourself as Friend")
+            return 
+
+        friendship_exists = (
+        Friend.objects.filter(profile1=self, profile2=other).exists() or 
+        Friend.objects.filter(profile1=other, profile2=self).exists()
+        )
+
+        if friendship_exists:
+            print("Already Added as Friend")
+            return
+        else:
+            Friend.objects.create(profile1 = self, profile2 = other)
+
+    def get_friend_suggestions(self):
+        current_friend_ids = [friend.id for friend in self.get_friends()]
+        suggestions = Profile.objects.exclude(id__in=current_friend_ids).exclude(id=self.id)
+    
+        return suggestions
+    
 class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     message = models.CharField(max_length=280)  # Add max_length
