@@ -51,6 +51,19 @@ class Profile(models.Model):
     
         return suggestions
     
+    def get_news_feed(self):
+        # Get status messages for self
+        own_statuses = StatusMessage.objects.filter(profile=self)
+
+        #Friends
+        friend_ids = [friend.id for friend in self.get_friends()]
+        friend_statuses = StatusMessage.objects.filter(profile__in=friend_ids)
+
+        # Combine own statuses and friend statuses, ordered by timestamp
+        news_feed = (own_statuses | friend_statuses).order_by('-timestamp')
+        
+        return news_feed
+    
 class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     message = models.CharField(max_length=280)  # Add max_length

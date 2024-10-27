@@ -20,10 +20,14 @@
     <a href="{% url 'update_profile' pk=profile.pk %}" class="btn update-profile-btn">Update Profile</a>
 </div>
 
+
+
 <hr>
 <!-- Friends Section -->
 <h3>Friends
     <a href="{% url 'friend_suggestions' pk=profile.pk %}" class="btn btn-primary btn-smaller" style="margin-left: 10px;">View Friend Suggestions</a>
+    <a href="{% url 'news_feed' pk=profile.pk %}" class="btn btn-secondary btn-smaller" style="margin-left: 10px;">View News Feed</a>
+
 </h3>
 <div class="friends-list">
     {% with friends=profile.get_friends %}

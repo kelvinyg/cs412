@@ -1,0 +1,44 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block title %}News Feed{% endblock %}
+
+{% block content %}
+<h2>{{ profile.first_name }} {{ profile.last_name }}'s News Feed</h2>
+
+<!-- Back to Profile Button -->
+<div>
+    <a href="{% url 'show_profile' pk=profile.pk %}" class="back-button">Back to Profile</a>
+</div>
+
+<!-- News Feed Content -->
+<div class="news-feed">
+    {% if profile.get_news_feed %}
+        {% for status in profile.get_news_feed %}
+            <div class="status-message-card">
+                <!-- Display the profile picture and name of the author -->
+                <div class="profile-info">
+                    {% if status.profile.profile_pic %}
+                        <img src="{{ status.profile.profile_pic }}" alt="Profile Picture of {{ status.profile.first_name }}" class="small-profile-image">
+                    {% endif %}
+                    <strong class="profile-name">{{ status.profile.first_name }} {{ status.profile.last_name }}</strong>
+                </div>
+                
+                <!-- Status Message Content -->
+                <p>{{ status.message }}</p>
+                <small>Posted on: {{ status.timestamp }}</small>
+
+                <!-- Display any images associated with the status -->
+                {% if status.get_images.all %}
+                    <div class="status-images">
+                        {% for img in status.get_images.all %}
+                            <img src="{{ img.image_file.url }}" alt="Image for status message">
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No news feed available at this time.</p>
+    {% endif %}
+</div>
+{% endblock %}

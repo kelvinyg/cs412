@@ -429,3 +429,25 @@ input[type="file"]:focus {
 .back-button:hover {
     background-color: #c9302c;
 }
+
+/* Small profile image styling for the news feed */
+.small-profile-image {
+    width: 40px; /* Smaller size */
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px; /* Space between image and name */
+    vertical-align: middle;
+}
+
+/* Align the profile image and name */
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.profile-name {
+    color: #1f1bbf; /* Same color as used elsewhere for profile names */
+    font-weight: bold;
+}
