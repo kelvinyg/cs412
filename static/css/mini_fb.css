@@ -304,3 +304,52 @@ input[type="file"]:focus {
     display: inline-block;
     border-radius: 4px;  /* Slightly round the corners */
 }
+/* Friends List Styling */
+.friends-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Fill available space with minimum width */
+    gap: 15px;
+    padding: 20px 0;
+}
+
+.friend-card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slightly smaller shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    flex-direction: column; /* Stack image and info vertically */
+}
+
+.friend-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.friend-card img {
+    width: 80px; /* Set consistent size */
+    height: 80px;
+    border-radius: 50%; /* Make image circular */
+    object-fit: cover;
+    margin-bottom: 10px; /* Space between image and name */
+}
+
+.friend-info {
+    text-align: center;
+}
+
+.friend-info strong {
+    font-size: 0.95em;
+    color: #1f1bbf;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.friend-info p {
+    color: #666;
+    font-size: 0.85em;
+    margin: 0;
+}

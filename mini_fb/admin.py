@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Profile
 from .models import StatusMessage
 from .models import Image
+from .models import Friend
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
@@ -16,3 +17,7 @@ class StatusAdmin(admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('image_file', 'status_message', 'timestamp')
+
+@admin.register(Friend)
+class FriendAdmin(admin.ModelAdmin):
+    list_display = ('profile1','profile2','timestamp')

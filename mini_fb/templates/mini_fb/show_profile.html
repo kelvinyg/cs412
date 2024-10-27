@@ -21,6 +21,33 @@
 </div>
 
 <hr>
+<!-- Friends Section -->
+<!-- Friends Section -->
+<h3>Friends</h3>
+<div class="friends-list">
+    {% with friends=profile.get_friends %}
+        {% if friends %}
+            {% for friend in friends %}
+                <div class="friend-card">
+                    <!-- Friend profile image and name -->
+                    <img src="{{ friend.profile_pic }}" alt="Profile picture of {{ friend.first_name }}">
+                    <div class="friend-info">
+                        <strong>
+                            <a href="{% url 'show_profile' pk=friend.pk %}">
+                                {{ friend.first_name }} {{ friend.last_name }}
+                            </a>
+                        </strong>
+                        <p>{{ friend.city }}</p> <!-- Optional: add other details -->
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No friends to display.</p>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<hr>
 
 <h3>Status Messages</h3>
 <div class="status-messages">
