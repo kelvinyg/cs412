@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import ShowAllProfilesView  # Corrected view import
 from .views import ShowProfilePageView 
 from .views import CreateProfileView
@@ -21,5 +21,6 @@ urlpatterns = [
     path('status/<int:pk>/update',UpdateStatusMessageView.as_view(), name = "update_status" ),
     path('profile/<int:pk>/add_friend/<int:other_pk>', CreateFriendView.as_view(), name = "create_friend"),
     path('profile/<int:pk>/friend_suggestions/', ShowFriendSuggestionsView.as_view(), name='friend_suggestions'),
-    path('profile/<int:pk>/news_feed/', ShowNewsFeedView.as_view(), name='news_feed')
+    path('profile/<int:pk>/news_feed/', ShowNewsFeedView.as_view(), name='news_feed'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
