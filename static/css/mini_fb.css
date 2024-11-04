@@ -1,7 +1,7 @@
 /* General Page Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #483DCC; /* Blue background */
+    background-color: #483DCC;
     margin: 0;
     padding: 0;
     color: #333;
@@ -24,35 +24,60 @@ header h1 {
 
 /* Navigation Bar Styling */
 .navbar {
-    background-color: #333; /* Dark background for navbar */
+    background-color: #333;
     padding: 10px 0;
     text-align: center;
 }
 
 .navbar ul {
-    list-style-type: none; /* Remove bullet points */
+    list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center; /* Center the navigation links */
+    justify-content: center;
+    align-items: center; /* Vertically align items */
 }
 
 .navbar ul li {
-    margin: 0 15px; /* Space between links */
+    margin: 0 15px;
+    display: flex;
+    align-items: center; /* Align items vertically */
 }
 
-.navbar ul li a {
-    text-decoration: none; /* Remove underline */
-    color: white; /* White text for links */
-    font-size: 1.1em; /* Slightly larger font size */
-    padding: 10px 20px; /* Padding around links */
-    border-radius: 5px; /* Slightly rounded corners */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+/* Styling links in the navbar */
+.navbar ul li a, .logout-link {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
 }
 
-/* Hover effect for links */
-.navbar ul li a:hover {
-    background-color: #575757; /* Lighter grey background on hover */
+/* Hover effect for links and logout button */
+.navbar ul li a:hover, .logout-link:hover {
+    background-color: #575757;
+}
+
+/* Logout form styling in navbar */
+.logout-form {
+    margin: 0;
+    padding: 0;
+    display: flex; /* Align inline with the other items */
+    align-items: center;
+}
+
+/* Logout button styling to look like a link */
+.logout-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 /* Main Content Styling */
@@ -155,111 +180,6 @@ h2 {
     color: #666;
 }
 
-/* Form Container Styling */
-.form-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-container h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Form Elements */
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #333;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="file"] {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-top: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="file"]:focus {
-    border-color: #483DCC;
-    outline: none;
-}
-
-/* Button Styling */
-.btn, button {
-    display: inline-block; /* Ensure anchor behaves like a button */
-    width: 100%; /* Ensure full width */
-    box-sizing: border-box;
-    margin-top: 20px;
-    padding: 12px 20px;
-    background-color: #483DCC;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none; /* Remove underline for anchor tags */
-    text-align: center; /* Center the text */
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover, button:hover {
-    background-color: #3a32a1;
-}
-
-.btn:active, button:active {
-    background-color: #31278f;
-    transform: scale(0.98);
-}
-
-/* Cancel Button Styling */
-.cancel-button {
-    background-color: #d9534f; /* Cancel button background */
-    color: white;
-}
-
-.cancel-button:hover {
-    background-color: #c9302c;
-}
-
-.cancel-button:active {
-    background-color: #ac2925;
-}
-
-/* Form Buttons Container */
-.form-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.form-buttons .btn {
-    flex: 1;
-}
-
-/* Form Error Messages */
-.form-container .errorlist {
-    color: red;
-    margin-top: 5px;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .profile-container {
@@ -278,176 +198,4 @@ input[type="file"]:focus {
     .navbar ul li {
         margin: 10px 0;
     }
-
-    /* Adjust form buttons on small screens */
-    .form-buttons {
-        flex-direction: column;
-    }
-
-    .form-buttons .btn {
-        margin-right: 0;
-    }
-}
-
-.update-profile-btn {
-    width: 20%; /* Adjust width as needed */
-    padding: 8px 16px; /* Adjust padding to make it smaller */
-    font-size: 14px; /* Adjust font size */
-    margin: 10px auto; /* Center the button */
-}
-
-/* Smaller button styles */
-.btn-smaller {
-    padding: 5px 10px;   /* Reduce padding to make it smaller */
-    font-size: 12px;     /* Decrease font size */
-    width: auto;         /* Allow the button to adjust to the content size */
-    display: inline-block;
-    border-radius: 4px;  /* Slightly round the corners */
-}
-/* Friends List Styling */
-.friends-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Fill available space with minimum width */
-    gap: 15px;
-    padding: 20px 0;
-}
-
-.friend-card {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slightly smaller shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    flex-direction: column; /* Stack image and info vertically */
-}
-
-.friend-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-}
-
-.friend-card img {
-    width: 80px; /* Set consistent size */
-    height: 80px;
-    border-radius: 50%; /* Make image circular */
-    object-fit: cover;
-    margin-bottom: 10px; /* Space between image and name */
-}
-
-.friend-info {
-    text-align: center;
-}
-
-.friend-info strong {
-    font-size: 0.95em;
-    color: #1f1bbf;
-    font-weight: bold;
-    margin-bottom: 2px;
-}
-
-.friend-info p {
-    color: #666;
-    font-size: 0.85em;
-    margin: 0;
-}
-
-
-/* Standardized Profile Image Styling */
-.profile-image,
-.friend-suggestion-card img {
-    width: 150px; /* Standardize size */
-    height: 150px;
-    border-radius: 50%; /* Make circular */
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for consistency */
-    margin-bottom: 10px;
-}
-
-/* Friend Suggestions List Styling */
-.suggestions-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.friend-suggestion-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-}
-
-.friend-suggestion-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-.friend-suggestion-card strong {
-    font-size: 1.1em;
-    color: #1f1bbf;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.friend-suggestion-card a {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #483DCC;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.friend-suggestion-card a:hover {
-    background-color: #3a32a1;
-}
-
-/* Back Button Styling */
-.back-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #d9534f;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-.back-button:hover {
-    background-color: #c9302c;
-}
-
-/* Small profile image styling for the news feed */
-.small-profile-image {
-    width: 40px; /* Smaller size */
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px; /* Space between image and name */
-    vertical-align: middle;
-}
-
-/* Align the profile image and name */
-.profile-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.profile-name {
-    color: #1f1bbf; /* Same color as used elsewhere for profile names */
-    font-weight: bold;
 }

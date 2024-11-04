@@ -19,14 +19,19 @@
         <nav class="navbar">
             <ul>
                 <li><a href="{% url 'show_all_profiles' %}">View All Profiles</a></li>
-                <li><a href="{% url 'create_profile' %}">Create New Profile</a></li>
-                
+        
                 {% if user.is_authenticated %}
-                    <!-- Display username and log out link if user is authenticated -->
                     <li>Welcome, {{ user.username }}!</li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'show_profile' %}">My Profile</a></li>
+                    
+                    <!-- Logout button styled as a link -->
+                    <li>
+                        <form method="post" action="{% url 'logout' %}" class="logout-form">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-link">Logout</button>
+                        </form>
+                    </li>
                 {% else %}
-                    <!-- Show log in and sign up options if user is not authenticated -->
                     <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
             </ul>
