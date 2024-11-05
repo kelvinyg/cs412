@@ -33,6 +33,8 @@
                         </form>
                     </li>
                 {% else %}
+                    <!-- Link to create a new user profile if not logged in -->
+                    <li><a href="{% url 'create_profile' %}">Sign Up</a></li>
                     <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
             </ul>

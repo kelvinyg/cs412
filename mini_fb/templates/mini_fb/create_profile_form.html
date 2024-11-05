@@ -4,37 +4,40 @@
 <div class="form-container">
     <h2>Create a New Profile</h2>
 
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" class="profile-form">
         {% csrf_token %}
-
-        <!-- Account Information Section for UserCreationForm -->
+        
+        <!-- Account Information Section -->
         <h3>Account Information</h3>
-        <label for="id_username">Username</label>
-        {{ user_form.username }}
+        <div class="form-section">
+            <label for="id_username">Username</label>
+            {{ user_form.username }}
+            
+            <label for="id_password1">Password</label>
+            {{ user_form.password1 }}
 
-        <label for="id_password1">Password</label>
-        {{ user_form.password1 }}
+            <label for="id_password2">Confirm Password</label>
+            {{ user_form.password2 }}
+        </div>
 
-        <label for="id_password2">Confirm Password</label>
-        {{ user_form.password2 }}
-
-        <!-- Profile Information Section for CreateProfileForm -->
+        <!-- Profile Information Section -->
         <h3>Profile Information</h3>
+        <div class="form-section">
+            <label for="id_first_name">First Name</label>
+            {{ form.first_name }}
 
-        <label for="id_first_name">First Name</label>
-        {{ form.first_name }}
+            <label for="id_last_name">Last Name</label>
+            {{ form.last_name }}
 
-        <label for="id_last_name">Last Name</label>
-        {{ form.last_name }}
+            <label for="id_city">City</label>
+            {{ form.city }}
 
-        <label for="id_city">City</label>
-        {{ form.city }}
+            <label for="id_email">Email</label>
+            {{ form.email }}
 
-        <label for="id_email">Email</label>
-        {{ form.email }}
-
-        <label for="id_profile_pic">Profile Picture</label>
-        {{ form.profile_pic }}
+            <label for="id_profile_pic">Profile Picture</label>
+            {{ form.profile_pic }}
+        </div>
 
         <!-- Submit and Cancel Buttons -->
         <div class="form-buttons">

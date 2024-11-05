@@ -35,16 +35,15 @@ header h1 {
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center; /* Vertically align items */
+    align-items: center;
 }
 
 .navbar ul li {
     margin: 0 15px;
     display: flex;
-    align-items: center; /* Align items vertically */
+    align-items: center;
 }
 
-/* Styling links in the navbar */
 .navbar ul li a, .logout-link {
     text-decoration: none;
     color: white;
@@ -55,20 +54,17 @@ header h1 {
     display: inline-block;
 }
 
-/* Hover effect for links and logout button */
 .navbar ul li a:hover, .logout-link:hover {
     background-color: #575757;
 }
 
-/* Logout form styling in navbar */
 .logout-form {
     margin: 0;
     padding: 0;
-    display: flex; /* Align inline with the other items */
+    display: flex;
     align-items: center;
 }
 
-/* Logout button styling to look like a link */
 .logout-link {
     background: none;
     border: none;
@@ -96,7 +92,6 @@ main {
     gap: 20px;
 }
 
-/* Profile Card Styling */
 .profile-card {
     background-color: white;
     padding: 15px;
@@ -119,7 +114,6 @@ main {
     margin: 0 auto 10px;
 }
 
-/* Profile Info */
 .profile-info strong {
     display: block;
     font-size: 1.1em;
@@ -134,7 +128,6 @@ main {
     font-size: 0.9em;
 }
 
-/* Text Styling */
 h2 {
     color: #333;
     font-size: 1.8em;
@@ -190,7 +183,6 @@ h2 {
         margin: 0 0 20px;
     }
 
-    /* For responsive navbar */
     .navbar ul {
         flex-direction: column;
     }
@@ -198,4 +190,81 @@ h2 {
     .navbar ul li {
         margin: 10px 0;
     }
+}
+
+/* Form Styling for Create Profile */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.form-container h3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-container input:focus {
+    border-color: #483DCC;
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 20px;
+    background-color: #483DCC;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #3a32a1;
+}
+
+.cancel-button {
+    background-color: #d9534f;
+}
+
+.cancel-button:hover {
+    background-color: #c9302c;
 }
