@@ -4,6 +4,9 @@ from .models import Profile, Image, StatusMessage, Friend
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
 
 
 # Views accessible to everyone (no login required)
@@ -19,20 +22,40 @@ class ShowProfilePageView(DetailView):
     context_object_name = 'profile'
 
     def get_object(self):
-        # Retrieve the Profile for the logged-in user
-        return get_object_or_404(Profile, user=self.request.user)
+        # Check if 'pk' is provided in the URL kwargs
+        if 'pk' in self.kwargs:
+            # Fetch the profile for the specified pk
+            return get_object_or_404(Profile, pk=self.kwargs['pk'])
+        else:
+            # Otherwise, fetch the logged-in user's profile
+            return get_object_or_404(Profile, user=self.request.user)
 
 
-class CreateProfileView(LoginRequiredMixin, CreateView):
+class CreateProfileView(CreateView):
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
 
     def get_success_url(self):
-        return reverse('show_profile')
+        return reverse('show_profile', kwargs={'pk': self.object.pk})
 
-    def get_login_url(self) -> str:
-        '''return the URL required for login'''
-        return reverse('login')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_form'] = UserCreationForm()
+        return context
+
+    def form_valid(self, form):
+        user_form = UserCreationForm(self.request.POST)
+        
+        if user_form.is_valid():
+            user = user_form.save()
+            form.instance.user = user  # Attach the user to the profile
+
+            # Optionally, log in the user immediately after registration
+            login(self.request, user)
+
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 # Views requiring login for modifying database entries

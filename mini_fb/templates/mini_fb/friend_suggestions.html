@@ -7,7 +7,8 @@
 
 <!-- Back to Profile Button -->
 <div>
-    <a href="{% url 'show_profile' pk=profile.pk %}" class="back-button">Back to Profile</a>
+    <!-- Explicitly pass `user.profile.pk` for the profile URL -->
+    <a href="{% url 'show_profile' user.profile.pk %}" class="back-button">Back to Profile</a>
 </div>
 
 <!-- Friend Suggestions List -->
@@ -19,7 +20,8 @@
                     <img src="{{ suggestion.profile_pic }}" alt="Profile Picture of {{ suggestion.first_name }}">
                 {% endif %}
                 <strong>{{ suggestion.first_name }} {{ suggestion.last_name }}</strong>
-                <a href="{% url 'create_friend' pk=profile.pk other_pk=suggestion.pk %}" class="btn btn-primary btn-sm">Add Friend</a>
+                <!-- Use `other_pk=suggestion.pk` for adding a friend -->
+                <a href="{% url 'create_friend' other_pk=suggestion.pk %}" class="btn btn-primary btn-sm">Add Friend</a>
             </div>
         {% endfor %}
     {% else %}

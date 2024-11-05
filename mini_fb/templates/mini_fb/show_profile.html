@@ -8,27 +8,27 @@
 <div class="profile-details">
     <!-- Display profile picture if it's present, otherwise skip -->
     <div class="profile-image">
-    {% if profile.profile_pic %}
-        <img src="{{ profile.profile_pic }}" alt="Profile Picture of {{ profile.first_name }}">
-    {% endif %}
+        {% if profile.profile_pic %}
+            <img src="{{ profile.profile_pic }}" alt="Profile Picture of {{ profile.first_name }}">
+        {% endif %}
     </div>
     <p><strong>City:</strong> {{ profile.city }}</p>
     <p><strong>Email:</strong> {{ profile.email }}</p>
 </div>
 
 <div class="update-profile-link">
-    <a href="{% url 'update_profile' pk=profile.pk %}" class="btn update-profile-btn">Update Profile</a>
+    <!-- Removed `pk` argument -->
+    <a href="{% url 'update_profile' %}" class="btn update-profile-btn">Update Profile</a>
 </div>
-
-
 
 <hr>
 <!-- Friends Section -->
 <h3>Friends
-    <a href="{% url 'friend_suggestions' pk=profile.pk %}" class="btn btn-primary btn-smaller" style="margin-left: 10px;">View Friend Suggestions</a>
-    <a href="{% url 'news_feed' pk=profile.pk %}" class="btn btn-secondary btn-smaller" style="margin-left: 10px;">View News Feed</a>
-
+    <!-- Removed `pk` arguments -->
+    <a href="{% url 'friend_suggestions' %}" class="btn btn-primary btn-smaller" style="margin-left: 10px;">View Friend Suggestions</a>
+    <a href="{% url 'news_feed' %}" class="btn btn-secondary btn-smaller" style="margin-left: 10px;">View News Feed</a>
 </h3>
+
 <div class="friends-list">
     {% with friends=profile.get_friends %}
         {% if friends %}
@@ -38,11 +38,11 @@
                     <img src="{{ friend.profile_pic }}" alt="Profile picture of {{ friend.first_name }}">
                     <div class="friend-info">
                         <strong>
-                            <a href="{% url 'show_profile' pk=friend.pk %}">
+                            <a href="{% url 'show_profile' friend.pk %}">
                                 {{ friend.first_name }} {{ friend.last_name }}
                             </a>
                         </strong>
-                        <p>{{ friend.city }}</p> <!-- Optional: add other details -->
+                        <p>{{ friend.city }}</p>
                     </div>
                 </div>
             {% endfor %}
@@ -63,10 +63,10 @@
                     <p>{{ status.message }}</p>
                     <small>Posted on: {{ status.timestamp }}</small>
 
-                    <!-- Add the delete link -->
-                    <a href="{% url 'delete_status' status.pk %}" class="btn btn-danger btn-smaller">Delete</a>             
-                    <!-- Add the edit link for updating a status message -->
-                    <a href="{% url 'update_status' status.pk %}" class="btn btn-danger btn-smaller">Edit</a>       
+                    <!-- Delete and edit status messages -->
+                    <a href="{% url 'delete_status' status.pk %}" class="btn btn-danger btn-smaller">Delete</a>
+                    <a href="{% url 'update_status' status.pk %}" class="btn btn-warning btn-smaller">Edit</a>
+
                     <!-- Display images associated with the status message -->
                     {% if status.get_images.all %}
                         <div class="status-images">
@@ -85,9 +85,10 @@
     {% endif %}
 </div>
 
-<!-- Add the button to create a new message -->
+<!-- Button to create a new status message -->
 <div class="create-status-button">
-    <a href="{% url 'create_status' pk=profile.pk %}" class="btn btn-primary">Add Status Message</a>
+    <!-- Updated URL without pk -->
+    <a href="{% url 'create_status' %}" class="btn btn-primary">Add Status Message</a>
 </div>
 
 {% endblock %}

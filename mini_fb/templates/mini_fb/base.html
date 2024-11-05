@@ -22,7 +22,8 @@
         
                 {% if user.is_authenticated %}
                     <li>Welcome, {{ user.username }}!</li>
-                    <li><a href="{% url 'show_profile' %}">My Profile</a></li>
+                    <!-- Link to the logged-in user's profile using their profile pk -->
+                    <li><a href="{% url 'show_profile' user.profile.pk %}">My Profile</a></li>                    
                     
                     <!-- Logout button styled as a link -->
                     <li>

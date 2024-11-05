@@ -6,24 +6,33 @@
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        
-        <!-- First Name Field -->
+
+        <!-- Account Information Section for UserCreationForm -->
+        <h3>Account Information</h3>
+        <label for="id_username">Username</label>
+        {{ user_form.username }}
+
+        <label for="id_password1">Password</label>
+        {{ user_form.password1 }}
+
+        <label for="id_password2">Confirm Password</label>
+        {{ user_form.password2 }}
+
+        <!-- Profile Information Section for CreateProfileForm -->
+        <h3>Profile Information</h3>
+
         <label for="id_first_name">First Name</label>
         {{ form.first_name }}
 
-        <!-- Last Name Field -->
         <label for="id_last_name">Last Name</label>
         {{ form.last_name }}
 
-        <!-- City Field -->
         <label for="id_city">City</label>
         {{ form.city }}
 
-        <!-- Email Field -->
         <label for="id_email">Email</label>
         {{ form.email }}
 
-        <!-- Profile Picture Field -->
         <label for="id_profile_pic">Profile Picture</label>
         {{ form.profile_pic }}
 
