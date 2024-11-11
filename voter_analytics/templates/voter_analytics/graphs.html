@@ -1,0 +1,79 @@
+<!-- voter_analytics/templates/voter_analytics/graphs.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voter Data Graphs</title>
+</head>
+<body>
+    <h1>Voter Data Graphs</h1>
+
+    <!-- Filter Form -->
+    <form method="get">
+        <label for="party_affiliation">Party Affiliation:</label>
+        <select name="party_affiliation" id="party_affiliation">
+            <option value="">Any</option>
+            {% for party in party_affiliations %}
+                <option value="{{ party }}" {% if request.GET.party_affiliation == party %}selected{% endif %}>{{ party }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="min_birth_year">Minimum Date of Birth:</label>
+        <select name="min_birth_year" id="min_birth_year">
+            <option value="">Any</option>
+            {% for year in years %}
+                <option value="{{ year }}" {% if request.GET.min_birth_year == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="max_birth_year">Maximum Date of Birth:</label>
+        <select name="max_birth_year" id="max_birth_year">
+            <option value="">Any</option>
+            {% for year in years %}
+                <option value="{{ year }}" {% if request.GET.max_birth_year == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="voter_score">Voter Score:</label>
+        <select name="voter_score" id="voter_score">
+            <option value="">Any</option>
+            {% for score in voter_scores %}
+                <option value="{{ score }}" {% if request.GET.voter_score == score|stringformat:"s" %}selected{% endif %}>{{ score }}</option>
+            {% endfor %}
+        </select>
+
+        <fieldset>
+            <legend>Voted in Elections:</legend>
+            <label><input type="checkbox" name="v20_state" {% if request.GET.v20_state %}checked{% endif %}> 2020 State Election</label>
+            <label><input type="checkbox" name="v21_town" {% if request.GET.v21_town %}checked{% endif %}> 2021 Town Election</label>
+            <label><input type="checkbox" name="v21_primary" {% if request.GET.v21_primary %}checked{% endif %}> 2021 Primary Election</label>
+            <label><input type="checkbox" name="v22_general" {% if request.GET.v22_general %}checked{% endif %}> 2022 General Election</label>
+            <label><input type="checkbox" name="v23_town" {% if request.GET.v23_town %}checked{% endif %}> 2023 Town Election</label>
+        </fieldset>
+
+        <button type="submit">Filter</button>
+        <a href="{% url 'graphs' %}">Clear Filters</a>
+    </form>
+
+    <!-- Histogram of Voters by Year of Birth -->
+    <h2>Distribution of Voters by Year of Birth</h2>
+    <div>
+        {{ birth_year_chart|safe }}
+    </div>
+
+    <!-- Pie Chart of Voters by Party Affiliation -->
+    <h2>Distribution of Voters by Party Affiliation</h2>
+    <div>
+        {{ party_affiliation_chart|safe }}
+    </div>
+
+    <!-- Histogram of Voter Participation by Election -->
+    <h2>Voter Participation in Each Election</h2>
+    <div>
+        {{ election_participation_chart|safe }}
+    </div>
+
+    <p><a href="{% url 'voters' %}">Back to Voter List</a></p>
+</body>
+</html>

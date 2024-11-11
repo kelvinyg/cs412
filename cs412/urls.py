@@ -23,7 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Django admin
     path('restaurant/', include('restaurant.urls')),  # Restaurant URLs
     path('blog/', include('blog.urls')),
-    path('mini_fb/', include('mini_fb.urls'))
+    path('mini_fb/', include('mini_fb.urls')),
+    path('voters/', include('voter_analytics.urls')),
+
 ]
 
 # Serve static files during development

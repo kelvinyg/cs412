@@ -1,0 +1,35 @@
+<!-- voter_analytics/templates/voter_analytics/voter_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ voter.first_name }} {{ voter.last_name }} - Voter Details</title>
+</head>
+<body>
+    <h1>Voter Details: {{ voter.first_name }} {{ voter.last_name }}</h1>
+    
+    <p><strong>Address:</strong> {{ voter.street_number }} {{ voter.street_name }}{% if voter.apartment_number %}, Apt {{ voter.apartment_number }}{% endif %}, {{ voter.zip_code }}</p>
+    <p><strong>Date of Birth:</strong> {{ voter.date_of_birth }}</p>
+    <p><strong>Date of Registration:</strong> {{ voter.date_of_registration }}</p>
+    <p><strong>Party Affiliation:</strong> {{ voter.party_affiliation }}</p>
+    <p><strong>Precinct Number:</strong> {{ voter.precinct_number }}</p>
+    <p><strong>Voter Score:</strong> {{ voter.voter_score }}</p>
+
+    <h2>Voting History</h2>
+    <p><strong>Voted in 2020 State Election:</strong> {% if voter.v20_state %}Voted{% else %}Did Not Vote{% endif %}</p>
+    <p><strong>Voted in 2021 Town Election:</strong> {% if voter.v21_town %}Voted{% else %}Did Not Vote{% endif %}</p>
+    <p><strong>Voted in 2021 Primary Election:</strong> {% if voter.v21_primary %}Voted{% else %}Did Not Vote{% endif %}</p>
+    <p><strong>Voted in 2022 General Election:</strong> {% if voter.v22_general %}Voted{% else %}Did Not Vote{% endif %}</p>
+    <p><strong>Voted in 2023 Town Election:</strong> {% if voter.v23_town %}Voted{% else %}Did Not Vote{% endif %}</p>
+
+    <h2>Visit Voter Address on Google Maps</h2>
+    <p>
+        <a href="https://www.google.com/maps/search/?api=1&query={{ voter.street_number }}+{{ voter.street_name }}+{% if voter.apartment_number %}Apt+{{ voter.apartment_number }}+{% endif %}{{ voter.zip_code }}" target="_blank">
+            Open Address in Google Maps
+        </a>
+    </p>
+
+    <p><a href="{% url 'voters' %}">Back to Voter List</a></p>
+</body>
+</html>

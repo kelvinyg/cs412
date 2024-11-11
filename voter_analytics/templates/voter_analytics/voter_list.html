@@ -1,0 +1,106 @@
+<!-- voter_analytics/templates/voter_analytics/voter_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voter List</title>
+</head>
+<body>
+    <h1>Voter List</h1>
+
+    <!-- Filter Form -->
+    <form method="get">
+        <label for="party_affiliation">Party Affiliation:</label>
+        <select name="party_affiliation" id="party_affiliation">
+            <option value="">Any</option>
+            {% for party in party_affiliations %}
+                <option value="{{ party }}">{{ party }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="min_birth_year">Minimum Date of Birth:</label>
+        <select name="min_birth_year" id="min_birth_year">
+            <option value="">Any</option>
+            {% for year in years %}
+                <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="max_birth_year">Maximum Date of Birth:</label>
+        <select name="max_birth_year" id="max_birth_year">
+            <option value="">Any</option>
+            {% for year in years %}
+                <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="voter_score">Voter Score:</label>
+        <select name="voter_score" id="voter_score">
+            <option value="">Any</option>
+            {% for score in voter_scores %}
+                <option value="{{ score }}">{{ score }}</option>
+            {% endfor %}
+        </select>
+
+        <fieldset>
+            <legend>Voted in Elections:</legend>
+            <label><input type="checkbox" name="v20_state"> 2020 State Election</label>
+            <label><input type="checkbox" name="v21_town"> 2021 Town Election</label>
+            <label><input type="checkbox" name="v21_primary"> 2021 Primary Election</label>
+            <label><input type="checkbox" name="v22_general"> 2022 General Election</label>
+            <label><input type="checkbox" name="v23_town"> 2023 Town Election</label>
+        </fieldset>
+
+        <button type="submit">Filter</button>
+        <a href="{% url 'voters' %}">Clear Filters</a>
+    </form>
+
+    <!-- Voter Table -->
+    <!-- voter_analytics/templates/voter_analytics/voter_list.html -->
+
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Date of Birth</th>
+            <th>Party Affiliation</th>
+            <th>Voter Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for voter in voters %}
+            <tr>
+                <td><a href="{% url 'voter' voter.pk %}">{{ voter.first_name }}</a></td>
+                <td>{{ voter.last_name }}</td>
+                <td>{{ voter.street_number }} {{ voter.street_name }}</td>
+                <td>{{ voter.date_of_birth }}</td>
+                <td>{{ voter.party_affiliation }}</td>
+                <td>{{ voter.voter_score }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+ </table>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
