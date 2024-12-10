@@ -1,0 +1,696 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Button Styles */
+.button {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btn-blue {
+    background-color: #007BFF;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+/* Dashboard-Specific Styles */
+.dashboard .actions {
+    margin-bottom: 20px;
+}
+
+.dashboard .stats {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.dashboard .stats-item {
+    flex: 1;
+    padding: 15px;
+    background: #f9f9f9;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.dashboard .stats-item h3 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.dashboard .activity {
+    margin: 20px 0;
+}
+
+.dashboard .activity ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard .activity li {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+/* Expenses Owed Section */
+.expenses-owed {
+    margin: 20px 0;
+}
+
+.expenses-owed ul {
+    list-style: none;
+    padding: 0;
+}
+
+.expenses-owed li {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.expenses-owed li strong {
+    color: #007BFF;
+}
+
+/* User Groups Screen */
+/* Group List Styles */
+.group-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.group-list .group-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer; /* Makes the entire card clickable */
+}
+
+.group-list .group-card:hover {
+    background: #eaf4ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.group-list .group-card h2 {
+    margin: 0;
+    color: #007BFF;
+}
+
+.group-list .group-card p {
+    margin: 5px 0;
+}
+
+.group-list .group-card-content {
+    flex: 1;
+}
+
+.group-list .group-card-arrow {
+    font-size: 2rem;
+    color: #007BFF;
+    margin-left: 15px;
+    transition: transform 0.2s;
+}
+
+.group-list .group-card:hover .group-card-arrow {
+    transform: translateX(5px); /* Adds a slight animation to the arrow */
+}
+
+/* General styling for the page */
+/* General styling for the page */
+body.create-group {
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Make the body full height */
+}
+
+/* Center the form card */
+.create-group .form-container {
+    max-width: 400px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Header styling */
+.create-group h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #333;
+}
+
+/* Instruction text */
+.create-group p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+/* Form fields */
+.create-group .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Button styling */
+.create-group .btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-group .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+
+/*GROUP DETAIL START */
+.group-header {
+    text-align: left; /* Align text to the left for a cleaner look */
+    margin-bottom: 20px;
+    padding: 10px; /* Reduced padding */
+    background-color: #f9f9f9; /* Optional: light background for subtle separation */
+    border-radius: 8px;
+}
+
+.custom-back-button {
+    display: inline-block;
+    background-color: #ff0000;
+    color: white;
+    padding: 6px 12px; /* Reduced padding for smaller size */
+    font-size: 0.8rem; /* Slightly smaller font size */
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Add space below the button */
+}
+
+.custom-back-button:hover {
+    background-color: #ff0505;
+}
+
+.group-header-top {
+    display: flex;
+    justify-content: space-between; /* Place the button inline with the title */
+    align-items: center;
+}
+
+.group-header h1 {
+    font-size: 1.8rem; /* Smaller title */
+    color: #007BFF;
+    margin: 0; /* Remove extra margin */
+}
+
+.group-header p {
+    color: #555;
+    margin: 5px 0;
+    font-size: 0.9rem; /* Smaller subtitle and date */
+}
+
+.group-header .created-date {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* Itinerary Section */
+.section {
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.section h2 {
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 15px;
+}
+
+/* Day Groups */
+.itinerary-day-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f0f8ff; /* Light blue background */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    list-style: none; /* Removes bullet points */
+    padding-left: 0; /* Removes left padding if added */
+
+
+}
+
+.itinerary-day-group h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Individual Itinerary Items */
+.itinerary-item {
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    list-style: none; /* Ensures no bullets at the item level */
+
+}
+
+.itinerary-item h3 {
+    font-size: 1.2rem;
+    margin: 0 0 5px;
+    color: #007BFF;
+}
+
+.itinerary-item p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+/* Buttons */
+.section-header .button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: white;
+    background-color: #007BFF;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.section-header .button:hover {
+    background-color: #0056b3;
+}
+
+/* Expenses Section */
+.expense-list {
+    list-style: none;
+    padding: 0;
+}
+
+.expense-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+
+.expense-item strong {
+    color: #007BFF;
+}
+
+.expense-item .payer {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Empty Message Styling */
+.empty-message {
+    color: #999;
+    text-align: center;
+    font-style: italic;
+}
+
+.section-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-left h2 {
+    margin: 0;
+}
+
+.header-right {
+    display: flex;
+    gap: 10px; /* Adds spacing between buttons */
+}
+
+.header-right .button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.header-right .button:hover {
+    background-color: #0056b3;
+}
+
+/* General List Styles */
+.list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-item {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f1f9ff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-item:hover {
+    background-color: #e7f3ff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-item strong {
+    color: #007BFF;
+}
+
+.list-item .payer {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Empty Messages */
+.empty-message {
+    color: #999;
+    text-align: center;
+    font-style: italic;
+}
+/* Section Header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    color: #007BFF;
+    margin: 0;
+    text-decoration: none;
+
+}
+
+/* Section Styling */
+.section {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0; /* Add a line at the bottom of each section */
+    margin-bottom: 30px; /* Space between sections */
+}
+
+.section:last-child {
+    border-bottom: none; /* Remove the border from the last section */
+}
+
+/* Button Styling */
+.section-header .button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+/* Login Page */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-container h1 {
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+.login-container form {
+    margin-bottom: 20px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+.login-container p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.login-container a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+.group-expenses-page .expense-item {
+    padding: 10px; /* Reduce padding */
+    margin-bottom: 10px; /* Reduce margin between items */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    max-width: 700px; /* Adjust the width of the container */
+    margin: 10px auto; /* Center the container */
+}
+
+.group-expenses-page .expense-item h2 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem; /* Adjust the font size for headings */
+}
+
+.group-expenses-page .expense-item p {
+    margin: 5px 0; /* Reduce space between paragraphs */
+    font-size: 0.9rem; /* Adjust the font size for text */
+}
+
+.group-expenses-page .split-details {
+    margin-top: 10px;
+}
+
+.group-expenses-page .split-details h3 {
+    font-size: 1rem; /* Adjust the font size for "Split Details" heading */
+    margin-bottom: 5px; /* Reduce spacing */
+}
+
+.group-expenses-page .split-item {
+    font-size: 0.9rem; /* Adjust the font size for split details */
+    margin: 3px 0; /* Reduce spacing between split items */
+}
+
+.group-expenses-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align containers to the left */
+    padding: 20px;
+}
+
+.expenses-section {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 10px;
+    justify-content: flex-start; /* Align items to the left */
+}
+
+.expense-item {
+    flex: 0 1 calc(70% - 20px); /* Increase width to 70% of the row minus spacing */
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    height: auto;
+}
+
+.expense-item h2 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.expense-item p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+
+.summary-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-container h2 {
+    font-size: 1.5rem;
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+.summary-stats p {
+    font-size: 1rem;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Small Button Styles */
+.button-small {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.button-small.btn-blue {
+    background-color: #007BFF;
+}
+
+.button-small.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+.button-small.btn-red {
+    background-color: #FF4136;
+}
+
+.button-small.btn-red:hover {
+    background-color: #E30B16;
+}
+
+/* Itinerary Actions Container */
+.itinerary-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px; /* Adds space between buttons */
+}
+
+.expense-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.expense-info {
+    flex: 1; /* Allow the description to take up the remaining space */
+    font-size: 1rem;
+    color: #333;
+}
+
+.expense-actions {
+    display: flex;
+    gap: 10px; /* Add spacing between Edit and Delete buttons */
+}
+
+.button.btn-small {
+    padding: 5px 10px; /* Smaller padding for compact buttons */
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+}
+
+.btn-blue {
+    background-color: #007bff;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+.btn-red {
+    background-color: #dc3545;
+}
+
+.btn-red:hover {
+    background-color: #a71d2a;
+}

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "blog",
     "mini_fb",
     "voter_analytics",
+    "project"
 ]
 
 MIDDLEWARE = [
@@ -138,7 +139,8 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = "/media/"
-
+LOGIN_URL = '/project/login/'  # Your custom login path
+LOGIN_REDIRECT_URL = '/project/'  
 # settings.py
 
 

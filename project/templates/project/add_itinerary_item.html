@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Itinerary Item</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+</head>
+<body class="add-itinerary-item">
+    <div class="container">
+        <h1>Add Itinerary Item</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button btn-blue">Add Item</button>
+        </form>
+        <a href="{% url 'group_detail' pk=group.id %}" class="button btn-grey">Cancel</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+</head>
+<body class="add-expense-page">
+    <!-- Header -->
+    <header style="text-align: center; margin-bottom: 20px;">
+        <h1>Add Expense</h1>
+        <a href="{% url 'group_detail' group.id %}" class="button btn-blue">Back to Group</a>
+    </header>
+
+    <!-- Expense Form -->
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+        <form method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px;">
+                <label for="id_payer" style="display: block; font-weight: bold; margin-bottom: 5px;">Payer</label>
+                {{ form.payer }}
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="id_amount" style="display: block; font-weight: bold; margin-bottom: 5px;">Amount</label>
+                {{ form.amount }}
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="id_description" style="display: block; font-weight: bold; margin-bottom: 5px;">Description</label>
+                {{ form.description }}
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="id_date" style="display: block; font-weight: bold; margin-bottom: 5px;">Date</label>
+                {{ form.date }}
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="id_split_type" style="display: block; font-weight: bold; margin-bottom: 5px;">Split Type</label>
+                {{ form.split_type }}
+            </div>
+            <button type="submit" class="button btn-blue" style="width: 100%; padding: 10px; font-size: 1rem;">Add Expense</button>
+        </form>
+    </div>
+</body>
+</html>

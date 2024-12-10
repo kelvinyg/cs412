@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ group.name }}</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+</head>
+<body class="group-detail">
+    <!-- Group Header -->
+    <div class="group-header">
+        <div class="group-header-top">
+            <h1>{{ group.name }}</h1>
+            <a href="{% url 'user_groups' %}" class="custom-back-button">Back to User Groups</a>
+        </div>
+        <p>{{ group.description }}</p>
+        <p class="created-date">Created on: {{ group.created_at|date:"F j, Y" }}</p>
+    
+        <!-- Invite Section -->
+        <div class="invite-section">
+            <h2>Invite Members</h2>
+            <button id="generate-link-button" class="button btn-blue">Generate Invite Link</button>
+            <input
+                type="text"
+                id="invite-link"
+                value="{% url 'join_group_via_token' group.join_token %}"
+                readonly
+                style="display: none; width: 100%; margin-top: 10px; padding: 8px; border: 1px solid #ccc;"
+            />
+        </div>
+    </div>
+
+    
+
+    <!-- Itineraries Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Itinerary Items</h2>
+            <a href="{% url 'add_itinerary_item' group.id %}" class="button btn-blue">Add Itinerary Item</a>
+        </div>
+
+        {% if itinerary_items %}
+            <!-- Group itinerary items by day -->
+            {% regroup itinerary_items|dictsort:"day" by day as day_groups %}
+            <div class="itinerary-group-list">
+                {% for group in day_groups %}
+                    <div class="itinerary-day">
+                        <h3>Day {{ group.grouper|default_if_none:"Not Set" }}</h3>
+                        <ul>
+                            {% for item in group.list %}
+                                <li class="itinerary-item">
+                                    <strong>{{ item.title }}</strong>
+                                    <p><strong>Description:</strong> {{ item.description }}</p>
+                                    <p><strong>Date & Time:</strong> {{ item.date_time|date:"M j, Y, g:i A" }}</p>
+                                    <p><strong>Location:</strong> {{ item.location }}</p>
+                                    <p><strong>Category:</strong> {{ item.category }}</p>
+
+                                    <!-- Edit and Delete Buttons -->
+                                    <div class="itinerary-actions">
+                                        <a href="{% url 'update_itinerary_item' item.id %}" class="button-small btn-blue">Edit</a>
+                                        <a href="{% url 'delete_itinerary_item' item.id %}" class="button-small btn-red">Delete</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-message">No itinerary items for this group.</p>
+        {% endif %}
+    </div>
+
+    <!-- Expenses Section -->
+    <div class="section">
+        <div class="section-header-container">
+            <div class="header-left">
+                <h2>Expenses</h2>
+            </div>
+            <div class="header-right">
+                <a href="{% url 'group_expenses' group.id %}" class="button btn-blue">Show All Expenses</a>
+                <a href="{% url 'add_expense' group.id %}" class="button btn-blue">Add Expense</a>
+            </div>
+        </div>
+        {% if expenses %}
+            <ul class="expense-list">
+                {% for expense in expenses %}
+                    <li class="expense-item">
+                        <div class="expense-info">
+                            <strong>{{ expense.description }}</strong>: ${{ expense.amount }} 
+                            <span class="payer">(Paid by {{ expense.payer.username }})</span>
+                        </div>
+
+                        <!-- Edit and Delete Buttons -->
+                        <div class="expense-actions">
+                            <a href="{% url 'update_expense' expense.id %}" class="button btn-small btn-blue">Edit</a>
+                            <a href="{% url 'delete_expense' expense.id %}" class="button btn-small btn-red">Delete</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-message">No expenses recorded for this group.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('generate-link-button').addEventListener('click', function () {
+            const inviteLink = document.getElementById('invite-link');
+            inviteLink.style.display = 'block'; // Show the invite link input
+            inviteLink.select(); // Select the text in the input
+            document.execCommand('copy'); // Copy the selected text to clipboard
+            alert('Invite link copied to clipboard!'); // Notify the user
+        });
+    </script>
+</body>
+</html>

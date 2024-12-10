@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Group</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+</head>
+<body class="create-group">
+    <div class="form-container">
+        <h1>Create a Group</h1>
+        <p style="text-align: center; color: #666;">Organize your group with details about the trip.</p>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            
+            <!-- Group Name -->
+            <input 
+                type="text" 
+                name="name" 
+                placeholder="Group Name" 
+                class="form-control" 
+                required>
+            
+            <!-- Group Description -->
+            <textarea 
+                name="description" 
+                placeholder="Group Description" 
+                rows="3" 
+                class="form-control" 
+                required></textarea>
+            
+            <!-- Trip Start Date -->
+            <label for="start_date" class="form-label">Trip Start Date:</label>
+            <input 
+                type="date" 
+                name="start_date" 
+                id="start_date" 
+                class="form-control" 
+                required>
+            
+            <!-- Trip End Date -->
+            <label for="end_date" class="form-label">Trip End Date:</label>
+            <input 
+                type="date" 
+                name="end_date" 
+                id="end_date" 
+                class="form-control" 
+                required>
+            
+            <!-- Destination -->
+            <label for="destination" class="form-label">Destination:</label>
+            <input 
+                type="text" 
+                name="destination" 
+                id="destination" 
+                placeholder="Destination" 
+                class="form-control" 
+                required>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="btn-primary">Create Group</button>
+        </form>
+    </div>
+</body>
+</html>

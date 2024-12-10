@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Itinerary Item</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+</head>
+<body>
+    <h1>Delete Itinerary Item</h1>
+    <p>Are you sure you want to delete "{{ object.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="button btn-red">Yes, Delete</button>
+        <a href="{% url 'group_detail' object.itinerary.group.id %}" class="button btn-blue">Cancel</a>
+    </form>
+</body>
+</html>

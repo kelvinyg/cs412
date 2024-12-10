@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+</head>
+<body class="dashboard">
+    <div class="container">
+        <h1>Welcome back, {{ user.username }}!</h1>
+        <p>Manage your groups, track expenses, and plan your trips—all in one place.</p>
+
+        <div class="actions">
+            <a href="{% url 'user_groups' %}" class="button btn-blue">My Groups</a>
+            <a href="{% url 'create_group' %}" class="button btn-blue">Create Group</a>
+            {#<a href="{% url 'join_group' %}" class="button btn-blue">Join Group</a>#}
+        </div>
+
+        <div class="stats">
+            <div class="stats-item">
+                <h3>{{ total_groups }}</h3>
+                <p>Total Groups</p>
+            </div>
+            <div class="stats-item">
+                <h3>${{ total_expenses }}</h3>
+                <p>Total Expenses</p>
+            </div>
+            <div class="stats-item">
+                <h3>{{ upcoming_trips }}</h3>
+                <p>Upcoming Trips</p>
+            </div>
+        </div>
+
+        <div class="expenses-owed">
+            <h2>Expenses Owed</h2>
+            {% if expenses_owed %}
+                <ul>
+                    {% for expense in expenses_owed %}
+                        <li>
+                            <strong>{{ expense.expense__group__name }}</strong>: ${{ expense.total_owed }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You have no unpaid expenses!</p>
+            {% endif %}
+        </div>
+
+        <div class="activity">
+            <h2>Recent Activity</h2>
+            <ul>
+                {% for activity in recent_activity %}
+                <li>
+                    <p>{{ activity.action }}</p>
+                    <small>{{ activity.timestamp|date:"F j, Y, g:i a" }}</small>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

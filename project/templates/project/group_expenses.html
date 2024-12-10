@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ group.name }} - All Expenses</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <!-- Plotly Library -->
+</head>
+<body class="group-expenses-page">
+    <header class="expenses-header">
+        <h1>{{ group.name }} - All Expenses</h1>
+        <a href="{% url 'group_detail' group.id %}" class="custom-back-button">Back to Group</a>
+    </header>
+
+   
+
+
+    <!-- Mini Dashboard -->
+    <div class="summary-container">
+        <h2>Summary</h2>
+        <div class="summary-stats">
+            <p><strong>Total Expenses:</strong> ${{ expenses_total|default:"0.00" }}</p>
+            <p><strong>Total Owed:</strong> ${{ total_owed|default:"0.00" }}</p>
+            <p><strong>Total Paid:</strong> ${{ total_paid|default:"0.00" }}</p>
+        </div>
+    </div>
+
+    <!-- Expenses Section -->
+    <div class="expenses-section">
+        {% if expenses %}
+            <ul class="expense-list">
+                {% for expense in expenses %}
+                    <li class="expense-item">
+                        <div class="expense-header">
+                            <h2>{{ expense.description }}</h2>
+                            <p><strong>Amount:</strong> ${{ expense.amount }}</p>
+                            <p><strong>Date:</strong> {{ expense.date|date:"M j, Y" }}</p>
+                            <p><strong>Payer:</strong> {{ expense.payer.username }}</p>
+                        </div>
+
+                        <!-- Split details -->
+                        <div class="split-details">
+                            <h3>Split Details:</h3>
+                            <ul class="split-list">
+                                {% for split in expense.splits.all %}
+                                    {% if split.user != expense.payer %}
+                                        <li class="split-item">
+                                            <strong>{{ split.user.username }}</strong> owes 
+                                            <strong>${{ split.amount }}</strong> 
+                                            <span>({{ split.status|title }})</span>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-message">No expenses recorded for this group.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

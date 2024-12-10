@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Groups</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+</head>
+<body class="user-groups">
+    <div class="container">
+        <header class="header-container">
+            <h1>My Groups</h1>
+            <div class="actions">
+                <a href="{% url 'dashboard' %}" class="button btn-blue">Back to Dashboard</a>
+                <a href="{% url 'create_group' %}" class="button btn-blue">Create Group</a>
+                {#<a href="{% url 'join_group' %}" class="button btn-blue">Join Group</a>#}
+            </div>
+        </header>
+
+        <div class="group-list">
+            {% if memberships %}
+                <ul>
+                    {% for membership in memberships %}
+                        <li class="group-card" data-url="{% url 'group_detail' membership.group.id %}" onclick="location.href=this.getAttribute('data-url');">
+                            <div class="group-card-content">
+                                <h2>{{ membership.group.name }}</h2>
+                                <p>{{ membership.group.description }}</p>
+                                <p><strong>Role:</strong> {{ membership.role }}</p>
+                            </div>
+                            <div class="group-card-arrow">
+                                &rarr;
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You are not part of any groups yet. Join or create one to get started!</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

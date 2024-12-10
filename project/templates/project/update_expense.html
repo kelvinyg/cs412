@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Expense</title>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Update Expense</h1>
+        <form method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Expense Details</legend>
+                {{ form.as_p }}
+            </fieldset>
+            <div class="form-actions">
+                <button type="submit" class="button btn-blue">Save Changes</button>
+                <a href="{% url 'group_detail' object.group.id %}" class="button btn-grey">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
