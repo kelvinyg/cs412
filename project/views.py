@@ -32,7 +32,7 @@ class GroupListView(ListView):
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'project/dashboard.html'
-    login_url = '/accounts/login/'
+    login_url = '/project/login/' 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,7 +66,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
 class UserGroupsView(LoginRequiredMixin, ListView):
     template_name = 'project/user_groups.html'
-    login_url = '/accounts/login/'
+    login_url = '/project/login/' 
     context_object_name = 'memberships'
 
     def get_queryset(self):
@@ -76,7 +76,7 @@ class CreateGroupView(LoginRequiredMixin, CreateView):
     model = Group
     form_class = CreateGroupForm
     template_name = 'project/create_group.html'
-    login_url = '/accounts/login/'
+    login_url = '/project/login/' 
 
     def form_valid(self, form):
         response = super().form_valid(form)
