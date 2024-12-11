@@ -8,29 +8,24 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.urls import reverse_lazy, reverse
-from django.db.models import Prefetch
 from django.db import transaction
 from django.http import Http404
 from django.contrib.sites.shortcuts import get_current_site
+# Not Used 
 import pandas as pd
 import json
-
-
-
-
-
-
-
-# ListView to show all groups
-class GroupListView(ListView):
-    model = Group
-    template_name = 'group_list.html'  # Path to the template
-    context_object_name = 'groups'    # Variable name for the template
-
-
+from django.db.models import Prefetch
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
+    """
+    Displays the user's main dashboard shows an overview of:
+    - Total groups the user belongs to.
+    - Total expenses across all groups.
+    - Upcoming trips for groups the user is part of.
+    - Recent activity (last 10 actions related to the user or their groups).
+    - Expenses owed by the user, grouped by group.
+    """
     template_name = 'project/dashboard.html'
     login_url = '/project/login/' 
 
@@ -45,6 +40,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             group__membership__user=user,  # Ensure the user belongs to the group
             start_date__gte=now()          # Start date in the future or today
         ).distinct().count()  # Avoid duplicate results
+
         """# Fetch recent activity (last 10 actions involving the user or their groups)
         context['recent_activity'] = ActivityLog.objects.filter(
             Q(user=user) | Q(related_group__membership__user=user)
@@ -65,6 +61,11 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         return context
 
 class UserGroupsView(LoginRequiredMixin, ListView):
+    """
+    Displays a list of groups the user belongs to.
+    Uses the 'user_groups.html' template with 'memberships' as the context variable to get the groups
+    User is associated to.
+    """
     template_name = 'project/user_groups.html'
     login_url = '/project/login/' 
     context_object_name = 'memberships'
@@ -73,6 +74,13 @@ class UserGroupsView(LoginRequiredMixin, ListView):
         return Membership.objects.filter(user=self.request.user).select_related('group')
 
 class CreateGroupView(LoginRequiredMixin, CreateView):
+    """
+    View handles the creation of a new group. By default it will
+    - Adds the logged-in user as an admin.
+    - Creates an associated itinerary for the group.
+    - Logs the creation activity.
+    Redirects to the group detail page upon success.
+    """
     model = Group
     form_class = CreateGroupForm
     template_name = 'project/create_group.html'
@@ -81,10 +89,10 @@ class CreateGroupView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         
-        # Assign the creator as admin
+        # Assign the creator of grouo as admin
         Membership.objects.create(user=self.request.user, group=self.object, role='admin')
         
-        # Create the associated itinerary
+        # Create the associated itinerary object
         Itinerary.objects.create(
             group=self.object,
             start_date=form.cleaned_data['start_date'],
@@ -92,7 +100,7 @@ class CreateGroupView(LoginRequiredMixin, CreateView):
             destination=form.cleaned_data['destination']
         )
         
-        # Log the activity
+        # Log the activity object
         ActivityLog.objects.create(
             user=self.request.user,
             action=f"Created group '{self.object.name}'",
@@ -106,6 +114,11 @@ class CreateGroupView(LoginRequiredMixin, CreateView):
 
 
 class GroupDetailView(DetailView):
+    """
+    Displays the details of a specific group using group_id:
+    - Itinerary items related to the group.
+    - Expenses recorded for the group.
+    """
     model = Group
     template_name = 'project/group_detail.html'
     context_object_name = 'group'
@@ -114,17 +127,25 @@ class GroupDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         group = self.get_object()
 
-        # Fetch itinerary items related to the group
+        # Fetch the itinerary items for the grouo
         itinerary_items = ItineraryItem.objects.filter(itinerary__group=group)
         print(f"Fetched Itinerary Items for Group {group.id}: {itinerary_items}")
 
         context['itinerary_items'] = itinerary_items
         context['expenses'] = GroupExpense.objects.filter(group=group)
+
         print(context['itinerary_items'])
+
         return context
     
 
 class AddItineraryItemView(LoginRequiredMixin,CreateView):
+    """
+    -Handles the addition logic of an itinerary item to a group.
+    -Automatically associates the item with the group's itinerary.
+    -Adds the user as a member of the group if not already a member.
+    -Logs the addition activity.
+    """
     model = ItineraryItem
     form_class = ItineraryItemForm
     template_name = 'project/add_itinerary_item.html'
@@ -135,9 +156,11 @@ class AddItineraryItemView(LoginRequiredMixin,CreateView):
         itinerary, created = group.itineraries.get_or_create(group=group)  # Ensure the group has an itinerary
         form.instance.itinerary = itinerary
 
+        #Assigns a role, failsafe if creator is not admin or role process is lost
         if not Membership.objects.filter(user=self.request.user, group=group).exists():
             Membership.objects.create(user=self.request.user, group=group, role='member')
 
+        #Log Activity object
         ActivityLog.objects.create(
             user=self.request.user,
             action=f"Added itinerary item '{form.instance.title}' for '{itinerary.destination}'",
@@ -158,6 +181,10 @@ class AddItineraryItemView(LoginRequiredMixin,CreateView):
         return reverse('group_detail', kwargs={'pk': group_id})
     
 class UpdateItineraryItemView(UpdateView):
+    """
+    View Updates an itinerary item.
+    Redirects to the group detail page upon success.
+    """
     model = ItineraryItem
     fields = ['title', 'description', 'date_time', 'location', 'category', 'day']
     template_name = 'project/update_itinerary_item.html'
@@ -166,6 +193,10 @@ class UpdateItineraryItemView(UpdateView):
         return reverse_lazy('group_detail', kwargs={'pk': self.object.itinerary.group.id})
     
 class DeleteItineraryItemView(DeleteView):
+    """
+    View deletes an itinerary item.
+    Redirects to the group detail page upon success.
+    """
     model = ItineraryItem
     template_name = 'project/confirm_delete.html'
 
@@ -173,6 +204,12 @@ class DeleteItineraryItemView(DeleteView):
         return reverse_lazy('group_detail', kwargs={'pk': self.object.itinerary.group.id})
     
 class AddExpenseView(CreateView):
+    """
+    Handles adding logic for an expense for a group:
+    - Distributes the expense among group members.
+    - Logs the activity.
+    Redirects to the group detail page upon success.
+    """
     model = GroupExpense
     form_class = GroupExpenseForm
     template_name = 'project/add_expense.html'
@@ -183,11 +220,13 @@ class AddExpenseView(CreateView):
             group_id = self.kwargs.get('group_id')
             context['group'] = Group.objects.get(pk=group_id)
         except Group.DoesNotExist:
+            #Uses Django built in exception, sourced from ChatGPT
             raise Http404("Group not found")
         return context
 
     def form_valid(self, form):
-        # Start a transaction
+        # Start a transaction, uses atomic to make sure everything is exectued in a single transaction, 
+        # debugged using chatGPT as there would be conflicts for the different models
         with transaction.atomic():
             # Save the expense
             expense = form.save(commit=False)
@@ -228,6 +267,11 @@ class AddExpenseView(CreateView):
         return reverse('group_detail', kwargs={'pk': group_id})
     
 class UpdateExpenseView(UpdateView):
+    """
+    Handles the logic of users updating an existing expense.
+    Ensures the group associated with the expense cannot be changed during the update.
+    Redirects to the group detail page after the update is successful.
+    """
     model = GroupExpense
     form_class = GroupExpenseForm
     template_name = 'project/update_expense.html'
@@ -249,6 +293,10 @@ class UpdateExpenseView(UpdateView):
         return reverse('group_detail', kwargs={'pk': self.object.group.id})
     
 class DeleteExpenseView(DeleteView):
+    """
+    Allows the user to delete an existing expense.
+    Ensures proper redirection after deletion.
+    """
     model = GroupExpense
     template_name = 'project/delete_expense.html'
 
@@ -261,13 +309,19 @@ class DeleteExpenseView(DeleteView):
     
 
 class JoinGroupViaTokenView(LoginRequiredMixin, View):
+    """
+    Allows users to join a group using a unique invite token.
+    If the user is already a member of the group, an error message is shown.
+    Otherwise, the user is added to the group as a member.
+    Logs the activity and redirects to the group detail page.
+    """
     login_url = '/project/login/'  # Redirect for unauthenticated users
 
     def get(self, request, join_token):
         # Fetch the group associated with the join token
         group = get_object_or_404(Group, join_token=join_token)
 
-        # Generate the invite link
+        # Generate the invite link logic 
         protocol = "https" if request.is_secure() else "http"
         domain = get_current_site(request).domain
         invite_link = f"{protocol}://{domain}/project/groups/invite/{group.join_token}/"
@@ -302,7 +356,7 @@ class GroupExpensesView(DetailView):
         context = super().get_context_data(**kwargs)
         group = self.get_object()
 
-        # Fetch all expenses for the group
+        # Fetch all the expenses for the group
         expenses = GroupExpense.objects.filter(group=group).prefetch_related('splits__user')
         context['expenses'] = expenses
 
@@ -333,24 +387,7 @@ class GroupExpensesView(DetailView):
 
         return context
     
-"""
-NOT IMPLEMENTED YET 
 
 
-
-def join_group(request, join_token):
-    group = get_object_or_404(Group, join_token=join_token)
-    if request.user.is_authenticated:
-        Membership.objects.get_or_create(user=request.user, group=group, role='member')
-        # Log the activity
-        ActivityLog.objects.create(
-            user=request.user,
-            action=f"Joined group '{group.name}'",
-            related_group=group
-        )
-        return redirect('group_detail', pk=group.id)
-    return redirect('login')
-
-"""
 
 

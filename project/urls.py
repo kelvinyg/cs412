@@ -1,6 +1,6 @@
 # project/urls.py
 from django.urls import path
-from .views import GroupListView, GroupDetailView, DashboardView, UserGroupsView, CreateGroupView, AddItineraryItemView, AddExpenseView, JoinGroupViaTokenView, GroupExpensesView, UpdateItineraryItemView, DeleteItineraryItemView, UpdateExpenseView, DeleteExpenseView
+from .views import  GroupDetailView, DashboardView, UserGroupsView, CreateGroupView, AddItineraryItemView, AddExpenseView, JoinGroupViaTokenView, GroupExpensesView, UpdateItineraryItemView, DeleteItineraryItemView, UpdateExpenseView, DeleteExpenseView
 from . import views  
 from django.contrib.auth import views as auth_views
 
